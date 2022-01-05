@@ -1,4 +1,4 @@
-export default function SearchBar({ handleInputChange, handleRadioChange, queryType }) {
+export default function SearchBar({ handleInputChange, handleRadioChange, handleSubmit, queryType }) {
   return (
     <div className="search-bar">
       <form>
@@ -27,7 +27,7 @@ export default function SearchBar({ handleInputChange, handleRadioChange, queryT
           />
           Organization
         </label>
-        <button>Search</button>
+        <button onClick={handleSubmit}>Search</button>
       </form>
     </div>
   );
