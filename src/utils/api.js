@@ -11,7 +11,6 @@ export async function getUserRepos(username) {
       "Accept": "application/vnd.github.v3+json",
     }
   })
-  console.log(repos);
   return repos;
 }
 

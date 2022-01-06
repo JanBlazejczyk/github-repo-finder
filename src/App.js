@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import SearchBar from "./components/SearchBar";
+import ReposList from "./components/ReposList";
 import { getUserRepos } from "./utils/api";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   const sortArrayOfReposObjectsByStars = (arr) => {
     return arr.sort((a, b) =>
       // if repos have the same number of stars, sort them by name
-      (a.stargazers_count > b.stargazers_count) ? 1 : (a.stargazers_count === b.stargazers_count) ? ((a.name > b.name) ? 1 : -1) : -1);
+      (a.stargazers_count < b.stargazers_count) ? 1 : (a.stargazers_count === b.stargazers_count) ? ((a.name > b.name) ? 1 : -1) : -1);
   }
 
   const handleSearchQueryChange = (event) => {
@@ -34,6 +35,7 @@ function App() {
         handleInputChange={handleSearchQueryChange}
         handleSubmit={handleSearch}
       />
+      <ReposList repos={repos} />
     </div>
   );
 }
