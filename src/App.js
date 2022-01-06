@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import SearchBar from "./components/SearchBar";
+import NavBar from "./components/NavBar";
 import ReposList from "./components/ReposList";
 import { getUserRepos } from "./utils/api";
 
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBar
+      <NavBar
         handleInputChange={handleSearchQueryChange}
         handleSubmit={handleSearch}
       />

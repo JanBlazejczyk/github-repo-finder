@@ -1,0 +1,23 @@
+@import "../utils";
+
+.search-bar {
+    margin: 8px 10px 10px 10px;
+
+    &--input {
+        padding: 0.5rem 0 0.5rem 0.5rem;
+        border-radius: 0.35rem;
+        border: 1px $border-color-input solid;
+        text-align: left;
+        color: $font-color-header;
+        background-color: $background-color-input;
+    }
+
+    ::placeholder {
+        color: $font-color-header;
+    }
+
+    &--input:focus {
+        border: 1px $font-color-blue solid;
+        outline: none;
+    }
+}
