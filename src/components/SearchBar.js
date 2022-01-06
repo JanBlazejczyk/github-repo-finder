@@ -1,4 +1,4 @@
-export default function SearchBar({ handleInputChange, handleRadioChange, handleSubmit, queryType }) {
+export default function SearchBar({ handleInputChange, handleSubmit }) {
   return (
     <div className="search-bar">
       <form>
@@ -7,26 +7,6 @@ export default function SearchBar({ handleInputChange, handleRadioChange, handle
           placeholder="Search repos"
           onChange={handleInputChange}
         />
-        <label>
-          <input
-            type="radio"
-            name="usr/org"
-            value="user"
-            checked={queryType === "user"}
-            onChange={handleRadioChange}
-          />
-          User
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="usr/org"
-            value="organization"
-            checked={queryType === "organization"}
-            onChange={handleRadioChange}
-          />
-          Organization
-        </label>
         <button onClick={handleSubmit}>Search</button>
       </form>
     </div>
