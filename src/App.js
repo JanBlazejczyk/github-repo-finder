@@ -25,7 +25,6 @@ function App() {
     setSearchError(null)
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
-      setRepos([]);
       saveRepos();
     } else {
       setSearchError("Please enter valid username")
@@ -38,14 +37,13 @@ function App() {
       .then(data => sortArrayOfReposObjectsByStars(data))
       .then(sortedRepos => setRepos(sortedRepos))
       .catch((error) => {
-        console.error(error);
-        setRepos("Not found");
+        setRepos(error);
       });
   }
 
   const resetStateToDefault = () => {
-    setRepos([]);
     setSearchQuery("");
+    setRepos([])
   }
 
   return (

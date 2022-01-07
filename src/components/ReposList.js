@@ -5,22 +5,33 @@ import "./ReposList.scss";
 
 export default function ReposList({ repos = [] }) {
 
-  if (repos.length !== 0 && repos !== "Not found") {
+  // in case repos contains a response which is an error
+  if (repos.name === "HttpError") {
+    if (repos.status !== 404) {
+      return (
+        <div>
+          Something went wrong: {repos.status}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          User not found
+        </div>
+      )
+    }
+  }
+
+  if (repos.length !== 0) {
     return (
       <main className="repos__list">
         {repos.map((repo) => (<Repo repository={repo} key={repo.id} />))}
       </main>
     )
-  } else if (repos === "Not found") {
-    return (
-      <div className="repos__list__message">
-        Username not found
-      </div>
-    )
   } else {
     return (
-      <div className="repos__list__message">
-        Search for users repos
+      <div>
+        Search for users
       </div>
     )
   }
