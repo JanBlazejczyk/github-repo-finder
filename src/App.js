@@ -30,14 +30,15 @@ function App() {
       setReposListMessage(null);
       saveRepos();
     } else {
-      setUsernameError("Please enter valid username")
+      setUsernameError("Please enter valid GitHub username");
+      setRepos([]);
     }
   }
 
   const checkData = (data) => {
     if (data.name === "HttpError") {
       if (data.status === 404) {
-        setReposListMessage("user not found");
+        setReposListMessage("User not found");
         setRepos([]);
       } else {
         setReposListMessage(`Something went wrong: ${data.status}`);

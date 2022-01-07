@@ -4,12 +4,22 @@ import "./ReposList.scss";
 
 export default function ReposList({ message, repos = [] }) {
 
-  return (
-    <main>
+
+  if (message === null) {
+    return (
       <div>
-        {message}
+        {repos.map((repo) => (<Repo repository={repo} key={repo.id} />))}
       </div>
-      {repos.map((repo) => (<Repo repository={repo} key={repo.id} />))}
-    </main>
-  )
+    )
+  } else {
+    return (
+      <main>
+        <div className="repos__list__message">
+          {message}
+        </div>
+      </main>
+    )
+  }
+
+
 }

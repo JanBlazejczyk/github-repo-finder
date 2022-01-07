@@ -2,6 +2,13 @@
 
 .repos__list {
     background-color: $background-color-main;
+
+    &__message {
+        color: $font-color-header;
+        text-align: center;
+        margin-top: 30vh;
+        font-size: 2rem;
+    }
 }
 
 body {
