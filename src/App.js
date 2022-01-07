@@ -23,10 +23,11 @@ function App() {
   }
   const handleSearch = (event) => {
     event.preventDefault();
-    setReposListMessage(null);
+
     setUsernameError(null);
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
+      setReposListMessage(null);
       saveRepos();
     } else {
       setUsernameError("Please enter valid username")

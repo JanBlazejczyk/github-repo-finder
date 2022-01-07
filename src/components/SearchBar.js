@@ -10,7 +10,7 @@ export default function SearchBar({ handleInputChange, handleSubmit, error }) {
         <InputField handleInputChange={handleInputChange} />
         <Button label="Search" handleSubmit={handleSubmit} />
       </form>
-      <div className="search-bar_error">
+      <div className="search-bar__error">
         {error}
       </div>
     </div>
