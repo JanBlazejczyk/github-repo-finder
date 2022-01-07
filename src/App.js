@@ -8,7 +8,8 @@ import githubUsernameRegex from 'github-username-regex';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchError, setSearchError] = useState();
+  const [usernameError, setUsernameError] = useState();
+  const [reposListMessage, setReposListMessage] = useState("Search for users");
   const [repos, setRepos] = useState([]);
 
   const sortArrayOfReposObjectsByStars = (arr) => {
@@ -22,14 +23,29 @@ function App() {
   }
   const handleSearch = (event) => {
     event.preventDefault();
-    setSearchError(null)
+    setReposListMessage(null);
+    setUsernameError(null);
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
       saveRepos();
     } else {
-      setSearchError("Please enter valid username")
+      setUsernameError("Please enter valid username")
     }
+  }
 
+  const checkData = (data) => {
+    if (data.name === "HttpError") {
+      if (data.status === 404) {
+        setReposListMessage("user not found");
+        setRepos([]);
+      } else {
+        setReposListMessage(`Something went wrong: ${data.status}`);
+        setRepos([]);
+      }
+    }
+    else {
+      setReposListMessage(null);
+    }
   }
 
   const saveRepos = () => {
@@ -37,13 +53,15 @@ function App() {
       .then(data => sortArrayOfReposObjectsByStars(data))
       .then(sortedRepos => setRepos(sortedRepos))
       .catch((error) => {
-        setRepos(error);
+        checkData(error);
       });
   }
 
   const resetStateToDefault = () => {
     setSearchQuery("");
-    setRepos([])
+    setRepos([]);
+    setReposListMessage("Search for users");
+    setUsernameError(null);
   }
 
   return (
@@ -52,9 +70,9 @@ function App() {
         handleInputChange={handleSearchQueryChange}
         handleSubmit={handleSearch}
         handleLogoClick={resetStateToDefault}
-        searchError={searchError}
+        searchError={usernameError}
       />
-      <ReposList repos={repos} />
+      <ReposList repos={repos} message={reposListMessage} />
     </div>
   );
 }
