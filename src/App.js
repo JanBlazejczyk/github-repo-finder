@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import NavBar from "./components/NavBar";
-import ReposList from "./components/ReposList";
+import { NavBar, ReposList } from "./components";
 import { getUserRepos } from "./utils/api";
 
 import githubUsernameRegex from 'github-username-regex';

@@ -1,4 +1,4 @@
-import "./styles/InputField.scss";
+import "../styles/InputField.scss";
 
 export default function InputField({ handleInputChange, handleSearch }) {
 

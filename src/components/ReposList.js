@@ -1,17 +1,14 @@
-import Repo from "./Repo";
-
-import "./styles/ReposList.scss";
-
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 
-export default function ReposList({ message, loading, repos = [] }) {
+import Repo from "./Repo";
+import "../styles/ReposList.scss";
 
+export default function ReposList({ message, loading, repos = [] }) {
 
   if (message === null) {
     return (
       <main className="repos__list">
-
         {repos.map((repo) => (
           <ReactPlaceholder
             type='textRow'

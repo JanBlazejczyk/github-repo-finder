@@ -1,4 +1,4 @@
-import "./styles/Button.scss";
+import "../styles/Button.scss";
 
 export default function Button({ handleSubmit, label }) {
   return (
