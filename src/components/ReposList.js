@@ -2,14 +2,37 @@ import Repo from "./Repo";
 
 import "./ReposList.scss";
 
-export default function ReposList({ message, repos = [] }) {
+import ReactPlaceholder from 'react-placeholder';
+import "react-placeholder/lib/reactPlaceholder.css";
+
+export default function ReposList({ message, loading, repos = [] }) {
 
 
   if (message === null) {
     return (
       <main className="repos__list">
-        {repos.map((repo) => (<Repo repository={repo} key={repo.id} />))}
-      </main>
+
+        {repos.map((repo) => (
+          <ReactPlaceholder
+            type='textRow'
+            rows={7}
+            ready={!loading}
+            showLoadingAnimation={true}
+            key={repo.id}
+            style={{
+              textAlign: "center",
+              margin: "20px",
+              borderRadius: "0.4rem",
+              width: "93vw",
+              height: "20vw",
+              color: "#22272e"
+            }}
+          >
+            <Repo repository={repo} key={repo.id} />
+          </ReactPlaceholder>
+        ))}
+
+      </main >
     )
   } else {
     return (
