@@ -19,6 +19,7 @@ export default function ReposList({ message, loading, repos = [] }) {
             ready={!loading}
             showLoadingAnimation={true}
             key={repo.id}
+            delay={1000}
             style={{
               textAlign: "center",
               margin: "20px",
