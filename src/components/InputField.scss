@@ -1,10 +1,9 @@
 @import "../utils";
 
 .search-bar {
-
     &--input {
         padding: 0.5rem 0 0.5rem 0.5rem;
-        border-radius: 0.35rem;
+        border-radius: 0.4rem;
         border: 1px $border-color-input solid;
         text-align: left;
         color: $font-color-header;

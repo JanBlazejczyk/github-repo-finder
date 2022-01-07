@@ -29,11 +29,17 @@ function App() {
       .catch(error => console.error(error));
   }
 
+  const resetStateToDefault = () => {
+    setRepos([]);
+    setSearchQuery("");
+  }
+
   return (
     <div className="App">
       <NavBar
         handleInputChange={handleSearchQueryChange}
         handleSubmit={handleSearch}
+        handleLogoClick={resetStateToDefault}
       />
       <ReposList repos={repos} />
     </div>

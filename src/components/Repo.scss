@@ -1,0 +1,49 @@
+@import "../utils";
+
+a {
+    color: $font-color-header;
+    text-decoration: none;
+
+    &:visited {
+        color: $font-color-header;
+        text-decoration: none;
+    }
+}
+
+.repo {
+    background-color: $background-color-container;
+    margin: 20px;
+    padding: 20px 20px 20px 20px;
+    border: 1px $border-color-input solid;
+    border-radius: 0.4rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+
+        &__stars {
+            width: 3.5rem;
+            color: $font-color-header;
+        }
+    }
+
+    &__line {
+        display: block;
+        margin-bottom: 10px;
+        color: $font-color-main;
+
+        &--last {
+            margin-bottom: 0;
+        }
+
+        &--header {
+            color: $font-color-header;
+            font-weight: 700;
+        }
+
+        &--stars {
+            color: $font-color-header;
+        }
+    }
+}
