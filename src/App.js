@@ -35,13 +35,6 @@ function App() {
     }
   }
 
-  const handleEnterPress = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      handleSearch(event);
-    }
-  };
-
   const checkData = (data) => {
     if (data.name === "HttpError") {
       if (data.status === 404) {
@@ -80,7 +73,6 @@ function App() {
         handleSubmit={handleSearch}
         handleLogoClick={resetStateToDefault}
         searchError={usernameError}
-        enterPress={handleEnterPress}
       />
       <ReposList repos={repos} message={reposListMessage} />
     </div>

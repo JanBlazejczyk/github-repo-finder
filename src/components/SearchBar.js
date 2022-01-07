@@ -7,7 +7,7 @@ export default function SearchBar({ handleInputChange, handleSubmit, error, hand
   return (
     <div className="search-bar">
       <form>
-        <InputField handleInputChange={handleInputChange} handleEnterPress={handleEnterPress} />
+        <InputField handleInputChange={handleInputChange} handleEnterPress={handleEnterPress} handleSearch={handleSubmit} />
         <Button label="Search" handleSubmit={handleSubmit} />
       </form>
       <div className="search-bar__error">
