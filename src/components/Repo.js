@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import "./Repo.scss";
+import "./styles/Repo.scss";
 
 export default function Repo({ repository }) {
 

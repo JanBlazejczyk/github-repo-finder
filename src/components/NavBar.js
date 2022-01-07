@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 
-import "./NavBar.scss";
+import "./styles/NavBar.scss";
 import logo from "./logo.png";
 
 export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, searchError }) {

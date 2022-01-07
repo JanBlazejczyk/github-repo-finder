@@ -1,6 +1,6 @@
 import Repo from "./Repo";
 
-import "./ReposList.scss";
+import "./styles/ReposList.scss";
 
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";

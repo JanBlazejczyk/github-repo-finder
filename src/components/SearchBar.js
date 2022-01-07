@@ -1,7 +1,7 @@
 import Button from "./Button";
 import InputField from "./InputField";
 
-import "./SearchBar.scss";
+import "./styles/SearchBar.scss";
 
 export default function SearchBar({ handleInputChange, handleSubmit, error, handleEnterPress }) {
   return (
