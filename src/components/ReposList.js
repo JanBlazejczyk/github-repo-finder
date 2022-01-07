@@ -7,9 +7,9 @@ export default function ReposList({ message, repos = [] }) {
 
   if (message === null) {
     return (
-      <div>
+      <main className="repos__list">
         {repos.map((repo) => (<Repo repository={repo} key={repo.id} />))}
-      </div>
+      </main>
     )
   } else {
     return (

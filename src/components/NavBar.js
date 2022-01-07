@@ -3,7 +3,7 @@ import SearchBar from "./SearchBar";
 import "./NavBar.scss";
 import logo from "./logo.png";
 
-export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, searchError }) {
+export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, searchError, enterPress }) {
   return (
     <nav className="nav-bar">
       <div className="nav-bar nav-bar__top">
@@ -18,6 +18,7 @@ export default function NavBar({ handleInputChange, handleSubmit, handleLogoClic
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         error={searchError}
+        handleEnterPress={enterPress}
       />
     </nav>
   );
