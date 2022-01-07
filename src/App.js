@@ -4,8 +4,11 @@ import NavBar from "./components/NavBar";
 import ReposList from "./components/ReposList";
 import { getUserRepos } from "./utils/api";
 
+import githubUsernameRegex from 'github-username-regex';
+
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchError, setSearchError] = useState();
   const [repos, setRepos] = useState([]);
 
   const sortArrayOfReposObjectsByStars = (arr) => {
@@ -19,14 +22,25 @@ function App() {
   }
   const handleSearch = (event) => {
     event.preventDefault();
-    saveRepos();
+    setSearchError(null)
+    // https://www.npmjs.com/package/github-username-regex
+    if (githubUsernameRegex.test(searchQuery)) {
+      setRepos([]);
+      saveRepos();
+    } else {
+      setSearchError("Please enter valid username")
+    }
+
   }
 
   const saveRepos = () => {
     getUserRepos(searchQuery)
       .then(data => sortArrayOfReposObjectsByStars(data))
       .then(sortedRepos => setRepos(sortedRepos))
-      .catch(error => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setRepos("Not found");
+      });
   }
 
   const resetStateToDefault = () => {
@@ -40,6 +54,7 @@ function App() {
         handleInputChange={handleSearchQueryChange}
         handleSubmit={handleSearch}
         handleLogoClick={resetStateToDefault}
+        searchError={searchError}
       />
       <ReposList repos={repos} />
     </div>

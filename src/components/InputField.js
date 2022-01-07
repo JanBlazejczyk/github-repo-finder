@@ -5,7 +5,7 @@ export default function InputField({ handleInputChange }) {
     <input
       className="search-bar search-bar--input"
       type="search"
-      placeholder="Search repos"
+      placeholder="Search users"
       onChange={handleInputChange}
     />
   );
