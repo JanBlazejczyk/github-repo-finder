@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# GitHub Repo Finder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How it works
 
-## Available Scripts
+The app searches GitHub profiles by username and shows the list of user's repositories using Github API.
 
-In the project directory, you can run:
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Live version
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The page is live [here](url_to_github_pages)
 
-### `npm test`
+### To run the app on your local host:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**clone the repository**
+**cd into repository directory**
 
-### `npm run build`
+#### Using npm:
+**npm install**
+**npm start**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Using yarn:
+**yarn install**
+**yarn start**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## GitHub API
 
-### `npm run eject`
+### Authentication
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Without authentication the number of requests per hour is limited to 60. We can extend that number to 5000 by [authenticating with OAuth token](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api). By default the app does not use authentication because it is deployed live on github pages and without the backend there is no safe way to authenticate in the code without exposing the auth token.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For testing purposes, the 60 requests limit was sufficient, if you wish to extend to 5000 run the app on your local machine and follow the instructions [here](https://github.com/octokit/octokit.js#octokit-api-client) to authenticate with Octokit.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you are forking the repository and making any changes, be aware not to expose your secrets within the code, read [this stackoverflow question](https://stackoverflow.com/questions/48699820/how-do-i-hide-api-key-in-create-react-app) for instruction on how to avoid that.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Requests
 
-## Learn More
+The app uses the "accept" header which is recommended in the documentation.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Number of results per page is set to 100 which is the maximum (default 30) to limit the number of requests that are made when fetching the bigger amounts of repositories (see Octokit and pagination below).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Note: there is a possibility to define the type of repositories we want to see, the app uses the default option which is "owner"**
 
-### Code Splitting
+[See the documentation for details](https://docs.github.com/en/rest/reference/repos#list-repositories-for-a-user).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Octokit and pagination
 
-### Analyzing the Bundle Size
+GitHub API uses pagination to limit the number of data that can be fetched with one request. In case of the GET request to fetch user's repositories the limit is 100. The app uses the [Octokit](https://github.com/octokit/octokit.js) package that enables pagination and gives the ability to retrieve all user repositories at once (even if the user has more than a 100 repositories) by making multiple requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Limitations
 
-### Making a Progressive Web App
+The app is tested to work fine with getting and displaying the repositories of the [user](https://github.com/sindresorhus?tab=repositories) who has over a 1000 repositories in his profile. In theory without the authentication it should be able to retrieve up to 6000 repositories at once (providing that no requests has been made in a given hour - limit of 60 requests per hour, 100 repositories per request) but it was not tested with those numbers and the amount of time needed to retrieve the data would be considerable. Nonetheless on average users have much less repositories in their profiles.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Validation
 
-### Advanced Configuration
+The app uses [github-username-regex package](https://www.npmjs.com/package/github-username-regex) for form validation (to check if the user input is the valid github username). If the username is not valid the form is not submitted (this is to save the number of made requests).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+GitHub API response when getting the repos of the user that does not exist is 404. In this case the app displays "User not found" message. If the response is an HTTP error with any other code the app displays "Something went wrong:" and the response status code.
 
-### Deployment
+## Loading placeholders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The app uses the [react-placeholder component](https://github.com/buildo/react-placeholder) to indicate content loading.
 
-### `npm run build` fails to minify
+Although the documentation mentions possible styling through class names it did not work. For that reason the styling for the placeholders is written in javascript.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Initial values hack: I've encountered a problem with displaying multiple placeholders at the same time (to mimic the looks of actual data), if the placeholder is used outside of map callback only one placeholder is displayed. In case of using it inside the map callback it works as intended but at the initial stage the mapped array (stored in state) is empty and it takes time to get the resources and store them in state. The placeholders are supposed to be an indication that the data is loading and to serve that purpose they need to be displayed right away for the sake of the UX. For that reason the initial state of repo's array is an array of numbers from 1 to 10. Thanks to this hack the 10 placeholders are displayed even if we have not perviously stored any repositories in state.
+
+
+## Font awesome
+
+The app uses the [Fontawesome library](https://fontawesome.com/) to display the star icon.
+
+## Search form
+
+The app uses controlled input component to handle the search. The form is very simple so [refs](https://pl.reactjs.org/docs/refs-and-the-dom.html) could be used to create an uncontrolled input, but this is discouraged in the React docs
+
+## Styling
+
+The app uses [Sass](https://sass-lang.com/) for styling. Each component's style resides in a separate file within the styles directory.
+
+
+## File structure
+
+The app is pretty small so for simplicity all the components are stored in the same directory.
