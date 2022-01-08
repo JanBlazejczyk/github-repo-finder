@@ -7,6 +7,7 @@ import githubUsernameRegex from 'github-username-regex';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentUser, setCurrentUser] = useState();
   const [usernameError, setUsernameError] = useState();
   const [reposListMessage, setReposListMessage] = useState("Search for users");
   const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +46,7 @@ function App() {
       .then(sortedRepos => setRepos(sortedRepos))
       .then(() => {
         console.log("Loading is set to false");
+        setCurrentUser(searchQuery);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -85,7 +87,7 @@ function App() {
         handleLogoClick={resetStateToDefault}
         searchError={usernameError}
       />
-      <ReposList repos={repos} message={reposListMessage} loading={isLoading} />
+      <ReposList repos={repos} message={reposListMessage} loading={isLoading} user={currentUser} />
     </div>
   );
 }
