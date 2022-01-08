@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { NavBar, ReposList } from "./components";
+import { NavBar, MainView } from "./components";
 import { getUserRepos } from "./utils/api";
 
 import githubUsernameRegex from 'github-username-regex';
@@ -8,6 +8,7 @@ import githubUsernameRegex from 'github-username-regex';
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentUser, setCurrentUser] = useState();
+  const [displayCurrentUser, setDisplayCurrentUser] = useState(false);
   const [usernameError, setUsernameError] = useState();
   const [reposListMessage, setReposListMessage] = useState("Search for users");
   const [isLoading, setIsLoading] = useState(true);
@@ -28,10 +29,12 @@ function App() {
     setUsernameError(null);
     console.log("Loading is set to true");
     setIsLoading(true);
+    setDisplayCurrentUser(false);
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
       setReposListMessage(null);
-      saveRepos()
+      saveRepos();
+      setDisplayCurrentUser(true);
     } else {
       setUsernameError("Please enter valid GitHub username");
       setRepos([]);
@@ -87,7 +90,7 @@ function App() {
         handleLogoClick={resetStateToDefault}
         searchError={usernameError}
       />
-      <ReposList repos={repos} message={reposListMessage} loading={isLoading} user={currentUser} />
+      <MainView repos={repos} message={reposListMessage} loading={isLoading} displayUser={displayCurrentUser} user={currentUser} />
     </div>
   );
 }
