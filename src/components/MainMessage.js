@@ -1,6 +1,8 @@
+import "../styles/MainMessage.scss";
+
 export default function MainMessage({ message }) {
   return (
-    <div className="repos__list__message">
+    <div className="main-message">
       {message}
     </div>
   )

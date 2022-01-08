@@ -1,0 +1,8 @@
+@import "./utils";
+
+.main-message {
+    color: $font-color-header;
+        text-align: center;
+        margin-top: 30vh;
+        font-size: $font-size-main-message;
+}
