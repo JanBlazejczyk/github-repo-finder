@@ -64,10 +64,10 @@ function App() {
     if (data.name === "HttpError") {
       if (data.status === 404) {
         setReposListMessage("User not found");
-        setRepos([]);
+        setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       } else {
         setReposListMessage(`Something went wrong: ${data.status}`);
-        setRepos([]);
+        setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       }
     }
     else {
@@ -77,7 +77,7 @@ function App() {
 
   const resetStateToDefault = () => {
     setSearchQuery("");
-    setRepos([]);
+    setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     setReposListMessage("Search for users");
     setUsernameError(null);
     setIsLoading(false)
