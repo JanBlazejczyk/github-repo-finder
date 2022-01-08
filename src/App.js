@@ -25,6 +25,8 @@ function App() {
   const handleSearch = (event) => {
     event.preventDefault();
     setUsernameError(null);
+    console.log("Loading is set to true");
+    setIsLoading(true);
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
       setReposListMessage(null);
@@ -32,7 +34,24 @@ function App() {
     } else {
       setUsernameError("Please enter valid GitHub username");
       setRepos([]);
+      console.log("Loading is set to false");
+      setIsLoading(false);
     }
+  }
+
+  const saveRepos = () => {
+    getUserRepos(searchQuery)
+      .then(data => sortArrayOfReposObjectsByStars(data))
+      .then(sortedRepos => setRepos(sortedRepos))
+      .then(() => {
+        console.log("Loading is set to false");
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        checkData(error);
+        console.log("Loading is set to false");
+        setIsLoading(false);
+      });
   }
 
   const checkData = (data) => {
@@ -50,24 +69,12 @@ function App() {
     }
   }
 
-  const saveRepos = () => {
-    setIsLoading(true)
-
-    getUserRepos(searchQuery)
-      .then(data => sortArrayOfReposObjectsByStars(data))
-      .then(sortedRepos => setRepos(sortedRepos))
-      .then(() => setIsLoading(false))
-      .catch((error) => {
-        checkData(error);
-        setIsLoading(false);
-      });
-  }
-
   const resetStateToDefault = () => {
     setSearchQuery("");
     setRepos([]);
     setReposListMessage("Search for users");
     setUsernameError(null);
+    setIsLoading(false)
   }
 
   return (

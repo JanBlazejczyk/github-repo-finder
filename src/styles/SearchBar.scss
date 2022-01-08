@@ -6,7 +6,7 @@
     &__error {
         color: $font-color-header;
         margin-left: 10px;
-        font-size: 0.8rem;
+        font-size: $font-size-searchbar-error;
     }
 
     &--input {
