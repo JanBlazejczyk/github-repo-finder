@@ -12,7 +12,8 @@ function App() {
   const [usernameError, setUsernameError] = useState();
   const [reposListMessage, setReposListMessage] = useState("Search for users");
   const [isLoading, setIsLoading] = useState(true);
-  const [repos, setRepos] = useState([]);
+  // initial values in this state are for displaying the placeholders (more in readme)
+  const [repos, setRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
   const sortArrayOfReposObjectsByStars = (arr) => {
     return arr.sort((a, b) =>

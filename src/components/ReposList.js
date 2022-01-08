@@ -3,14 +3,31 @@ import "react-placeholder/lib/reactPlaceholder.css";
 
 import Repo from "./Repo";
 import "../styles/ReposList.scss";
+import placeholderStyles from "../styles/placeholderStyles";
 
-export default function ReposList({ user, displayUser, repos = [] }) {
+export default function ReposList({ user, displayUser, loading, repos = [] }) {
 
   return (
     <div className="repos__list">
-      {displayUser && <div className="repos__list__user">{`${user}'s repos`}</div>}
+      <ReactPlaceholder
+        className="placeholder--username"
+        type='textRow'
+        ready={!loading}
+        showLoadingAnimation={true}
+        style={placeholderStyles.username}
+      >
+        {displayUser && <div className="repos__list__user">{`${user}'s repos`}</div>}
+      </ReactPlaceholder>
       {repos.map((repo) => (
-        <Repo repository={repo} key={repo.id} />
+        <ReactPlaceholder
+          className="placeholder--repo"
+          type='textRow'
+          ready={!loading}
+          showLoadingAnimation={true}
+          style={placeholderStyles.repo}
+        >
+          <Repo repository={repo} key={repo.id} />
+        </ReactPlaceholder>
       ))}
     </div >
   )
