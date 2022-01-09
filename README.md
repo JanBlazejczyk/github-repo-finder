@@ -13,16 +13,16 @@ The page is live [here](url_to_github_pages)
 
 ### To run the app on your local host:
 
-**clone the repository**
-**cd into repository directory**
+clone the repository
+cd into repository directory
 
 #### Using npm:
-**npm install**
-**npm start**
+`npm install`
+`npm start`
 
 #### Using yarn:
-**yarn install**
-**yarn start**
+`yarn install`
+`yarn start`
 
 
 ## GitHub API
@@ -41,7 +41,7 @@ The app uses the "accept" header which is recommended in the documentation.
 
 Number of results per page is set to 100 which is the maximum (default 30) to limit the number of requests that are made when fetching the bigger amounts of repositories (see Octokit and pagination below).
 
-**Note: there is a possibility to define the type of repositories we want to see, the app uses the default option which is "owner"**
+Note: there is a possibility to define the type of repositories we want to see, the app uses the default option which is "owner"
 
 [See the documentation for details](https://docs.github.com/en/rest/reference/repos#list-repositories-for-a-user).
 
@@ -49,11 +49,11 @@ Number of results per page is set to 100 which is the maximum (default 30) to li
 
 GitHub API uses pagination to limit the number of data that can be fetched with one request. In case of the GET request to fetch user's repositories the limit is 100. The app uses the [Octokit](https://github.com/octokit/octokit.js) package that enables pagination and gives the ability to retrieve all user repositories at once (even if the user has more than a 100 repositories) by making multiple requests.
 
-### Limitations
+## Limitations
 
-The app is tested to work fine with getting and displaying the repositories of the [user](https://github.com/sindresorhus?tab=repositories) who has over a 1000 repositories in his profile. In theory without the authentication it should be able to retrieve up to 6000 repositories at once (providing that no requests has been made in a given hour - limit of 60 requests per hour, 100 repositories per request) but it was not tested with those numbers and the amount of time needed to retrieve the data would be considerable. Nonetheless on average users have much less repositories in their profiles.
+The app is tested to work fine with getting and displaying the repositories of the [user](https://github.com/sindresorhus?tab=repositories) who has over a 1000 repositories in his profile. In theory without the authentication it should be able to retrieve up to 6000 repositories at once (providing that no requests has been made in a given hour - limit of 60 requests per hour, 100 repositories per request) but it was not tested with numbers that large and the amount of time needed to retrieve the data would be considerable. Nonetheless on average users have much less repositories in their profiles.
 
-### Validation
+## Validation
 
 The app uses [github-username-regex package](https://www.npmjs.com/package/github-username-regex) for form validation (to check if the user input is the valid github username). If the username is not valid the form is not submitted (this is to save the number of made requests).
 
