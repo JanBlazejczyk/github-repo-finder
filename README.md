@@ -2,7 +2,7 @@
 
 ## How it works
 
-The app searches GitHub profiles by username and shows the list of user's repositories using Github API.
+The app searches GitHub profiles by username and shows the list of user's repositories using Github API. The repositories are sorted by the number of stars.
 
 
 ## Usage

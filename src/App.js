@@ -15,6 +15,8 @@ function App() {
   // initial values in this state are for displaying the placeholders (more in readme)
   const [repos, setRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
+  // takes the arrays of repositories and returns an array
+  // sorted by stars and names
   const sortArrayOfReposObjectsByStars = (arr) => {
     return arr.sort((a, b) =>
       // if repos have the same number of stars, sort them by name
@@ -25,10 +27,10 @@ function App() {
     setSearchQuery(event.target.value);
   }
 
+
   const handleSearch = (event) => {
     event.preventDefault();
     setUsernameError(null);
-    console.log("Loading is set to true");
     setIsLoading(true);
     setDisplayCurrentUser(false);
     // https://www.npmjs.com/package/github-username-regex
@@ -36,37 +38,38 @@ function App() {
       setReposListMessage(null);
       saveRepos();
       setDisplayCurrentUser(true);
+      // if the input is not a valid github username
     } else {
       setUsernameError("Please enter valid GitHub username");
-      setRepos([]);
-      console.log("Loading is set to false");
+      setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       setIsLoading(false);
     }
   }
 
+  // retrieves data from github api, sorts them and save in state
   const saveRepos = () => {
     getUserRepos(searchQuery)
       .then(data => sortArrayOfReposObjectsByStars(data))
       .then(sortedRepos => setRepos(sortedRepos))
       .then(() => {
-        console.log("Loading is set to false");
         setCurrentUser(searchQuery);
         setIsLoading(false);
       })
       .catch((error) => {
-        checkData(error);
-        console.log("Loading is set to false");
+        checkError(error);
         setIsLoading(false);
       });
   }
 
-  const checkData = (data) => {
-    if (data.name === "HttpError") {
-      if (data.status === 404) {
+  // takes the error returned by the api
+  // checks the status code and displays the appropriate message
+  const checkError = (error) => {
+    if (error.name === "HttpError") {
+      if (error.status === 404) {
         setReposListMessage("User not found");
         setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       } else {
-        setReposListMessage(`Something went wrong: ${data.status}`);
+        setReposListMessage(`Something went wrong: ${error.status}`);
         setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       }
     }
@@ -91,7 +94,13 @@ function App() {
         handleLogoClick={resetStateToDefault}
         searchError={usernameError}
       />
-      <MainView repos={repos} message={reposListMessage} loading={isLoading} displayUser={displayCurrentUser} user={currentUser} />
+      <MainView
+        repos={repos}
+        message={reposListMessage}
+        loading={isLoading}
+        displayUser={displayCurrentUser}
+        user={currentUser}
+      />
     </div>
   );
 }

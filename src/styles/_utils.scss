@@ -18,3 +18,7 @@ $font-size-searchbar-error: 0.8rem;
 $font-size-main-message: 2rem;
 $font-size-header: 2rem;
 $font-size-username: 1.5rem;
+
+%button-hover {
+    box-shadow: inset 0 0 10px $font-color-blue;
+}

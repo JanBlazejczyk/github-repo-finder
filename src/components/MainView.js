@@ -10,7 +10,12 @@ export default function MainView({ message, repos, user, loading, displayUser })
   if (message === null) {
     return (
       <main className="main-view">
-        <ReposList repos={repos} user={user} displayUser={displayUser} loading={loading} />
+        <ReposList
+          repos={repos}
+          user={user}
+          displayUser={displayUser}
+          loading={loading}
+        />
       </main>
 
     );
