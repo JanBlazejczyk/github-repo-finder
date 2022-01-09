@@ -18,8 +18,9 @@ export default function ReposList({ user, displayUser, loading, repos = [] }) {
       >
         {displayUser && <div className="repos__list__user">{`${user}'s repos`}</div>}
       </ReactPlaceholder>
-      {repos.map((repo) => (
+      {repos.map((repo, index) => (
         <ReactPlaceholder
+          key={`placeholder-${index}`}
           className="placeholder--repo"
           type='textRow'
           ready={!loading}
