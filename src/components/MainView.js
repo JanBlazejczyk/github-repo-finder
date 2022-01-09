@@ -1,6 +1,3 @@
-import ReactPlaceholder from 'react-placeholder';
-import "react-placeholder/lib/reactPlaceholder.css";
-
 import ReposList from "./ReposList";
 import MainMessage from "./MainMessage";
 

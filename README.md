@@ -14,14 +14,17 @@ The page is live [here](url_to_github_pages)
 ### To run the app on your local host:
 
 clone the repository
+
 cd into repository directory
 
 #### Using npm:
 `npm install`
+
 `npm start`
 
 #### Using yarn:
 `yarn install`
+
 `yarn start`
 
 
