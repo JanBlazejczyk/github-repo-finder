@@ -27,16 +27,21 @@ function App() {
     setSearchQuery(event.target.value);
   }
 
-
+  // runs when the form (searchbar) is submitted
   const handleSearch = (event) => {
+    // prevent refreshing the page on form submit
     event.preventDefault();
     setUsernameError(null);
     setIsLoading(true);
     setDisplayCurrentUser(false);
+    // if the username in search query is valid - perform a search
     // https://www.npmjs.com/package/github-username-regex
     if (githubUsernameRegex.test(searchQuery)) {
+      // disappear the initial message
       setReposListMessage(null);
+      // save user repos in state
       saveRepos();
+      // display username above the list of repos
       setDisplayCurrentUser(true);
       // if the input is not a valid github username
     } else {
