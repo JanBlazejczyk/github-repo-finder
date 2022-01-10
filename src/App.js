@@ -23,7 +23,7 @@ function App() {
       (a.stargazers_count < b.stargazers_count) ? 1 : (a.stargazers_count === b.stargazers_count) ? ((a.name > b.name) ? 1 : -1) : -1);
   }
 
-  const handleSearchQueryChange = (event) => {
+  const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   }
 
@@ -46,8 +46,9 @@ function App() {
       // if the input is not a valid github username
     } else {
       setUsernameError("Please enter valid GitHub username");
-      setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       setIsLoading(false);
+      // username still need to be displayed if we already had other user's data shown
+      setDisplayCurrentUser(true);
     }
   }
 
@@ -94,10 +95,10 @@ function App() {
   return (
     <div className="App">
       <NavBar
-        handleInputChange={handleSearchQueryChange}
+        handleInputChange={handleInputChange}
         handleSubmit={handleSearch}
         handleLogoClick={resetStateToDefault}
-        searchError={usernameError}
+        usernameError={usernameError}
       />
       <MainView
         repos={repos}

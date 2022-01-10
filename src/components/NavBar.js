@@ -1,23 +1,16 @@
-import SearchBar from "./SearchBar";
+import { SearchBar, Heading } from "./";
 
 import "../styles/NavBar.scss";
-import logo from "../images/logo.png";
 
-export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, searchError }) {
+export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, usernameError }) {
   return (
     <nav className="nav-bar">
-      <div className="nav-bar nav-bar__top">
-        <div className="nav-bar nav-bar__top--logo" onClick={handleLogoClick}>
-          <img src={logo} alt="github logo" />
-        </div>
-        <div className="nav-bar nav-bar__top--heading">
-          <span>GitHub Repo Finder</span>
-        </div>
-      </div>
+      <Heading handleLogoClick={handleLogoClick} />
+
       <SearchBar
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
-        error={searchError}
+        error={usernameError}
       />
     </nav>
   );

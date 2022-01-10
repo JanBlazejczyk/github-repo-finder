@@ -1,0 +1,21 @@
+@import "./utils";
+
+.nav-bar__heading {
+      margin: 15px 10px 5px 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &--logo {
+          width: 4rem;
+          height: 4rem;
+          cursor: pointer;
+          margin-right: 20px;
+      }
+
+      &--title {
+          color: $font-color-header;
+          font-size: 1rem;
+          font-weight: 1em;
+      }
+}
