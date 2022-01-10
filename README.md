@@ -9,7 +9,7 @@ The app searches GitHub profiles by username and shows the list of user's reposi
 
 ### Live version
 
-The page is live [here](url_to_github_pages)
+The page is live [here](https://janblazejczyk.github.io/github-repo-finder/)
 
 ### To run the app on your local host:
 
