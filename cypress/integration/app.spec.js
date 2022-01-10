@@ -29,7 +29,7 @@ describe("General tests for the whole application", () => {
    it("should show (on submit) the message that the user is invalid when the input is invalid username", () => {
       cy
          .get(".search-bar--input")
-         .type("inavlidUser--");
+         .type("invalidUser--");
 
       cy
          .get(".button")
