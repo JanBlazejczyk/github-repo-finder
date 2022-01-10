@@ -1,4 +1,5 @@
 {
+  "homepage": "http://janblazejczyk.github.io/github-repo-finder",
   "name": "github-repo-finder",
   "version": "0.1.0",
   "private": true,
@@ -22,7 +23,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "cypress": "cypress open",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +48,8 @@
   },
   "devDependencies": {
     "cypress": "^9.2.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "gh-pages": "^3.2.3",
     "sass": "^1.46.0"
   }
 }
