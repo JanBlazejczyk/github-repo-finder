@@ -24,7 +24,6 @@ a {
 
         &__stars {
             width: 3.5rem;
-            color: $font-color-header;
         }
     }
 
@@ -42,7 +41,11 @@ a {
             font-weight: 700;
         }
 
-        &--stars {
+        &--star-icon {
+            color: $font-color-header;
+        }
+
+        &--star-count {
             color: $font-color-header;
         }
     }

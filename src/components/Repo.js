@@ -15,8 +15,8 @@ export default function Repo({ repository }) {
           {/* About: rel="noopener noreferrer": https://mathiasbynens.github.io/rel-noopener/ */}
           <span className="repo__line repo__line--header"><a title="see on github" href={html_url} target="_blank" rel="noopener noreferrer">{name}</a></span>
           <div className="repo__header repo__header__stars">
-            <span className="repo__line repo__line--stars">{starIcon}</span>
-            <span className="repo__line repo__line--stars">{stargazers_count}</span>
+            <span className="repo__line repo__line--star-icon">{starIcon}</span>
+            <span className="repo__line repo__line--star-count">{stargazers_count}</span>
           </div>
         </div>
         <span className="repo__line repo__line--last">{description}</span>
