@@ -1,4 +1,3 @@
-import Button from "./Button";
 import "../styles/Pagination.scss";
 
 export default function Pagination({ reposPerPage, totalRepos, handlePagination }) {

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 
@@ -6,6 +8,10 @@ import "../styles/ReposList.scss";
 import placeholderStyles from "../styles/placeholderStyles";
 
 export default function ReposList({ user, displayUser, loading, repos = [] }) {
+
+  useEffect(() => {
+    console.log(repos);
+  }, [repos]);
 
   return (
     <div className="repos__list">

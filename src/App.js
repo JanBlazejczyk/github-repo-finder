@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { NavBar, MainView, Pagination } from "./components";
+import { NavBar, MainView } from "./components";
 import { getUserRepos } from "./utils/api";
 
 import githubUsernameRegex from 'github-username-regex';
@@ -13,9 +13,18 @@ function App() {
   const [reposListMessage, setReposListMessage] = useState("Search for users");
   const [isLoading, setIsLoading] = useState(true);
   // initial values in this state are for displaying the placeholders (more in readme)
-  const [repos, setRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [repos, setRepos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [reposPerPage] = useState(10);
+  // repos to be displayed at the page
+  const [currentRepos, setCurrentRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+  // each time the repos state is changed update also current repos
+  useEffect(() => {
+    saveCurrentRepos();
+  }, [repos])
+
+
 
   // takes the arrays of repositories and returns an array
   // sorted by stars and names
@@ -34,23 +43,33 @@ function App() {
     // prevent refreshing the page on form submit
     event.preventDefault();
     setUsernameError(null);
-    setIsLoading(true);
     setDisplayCurrentUser(false);
-    // if the username in search query is valid - perform a search
-    // https://www.npmjs.com/package/github-username-regex
-    if (githubUsernameRegex.test(searchQuery)) {
-      // disappear the initial message
-      setReposListMessage(null);
-      // save user repos in state
-      saveRepos();
-      // display username above the list of repos
-      setDisplayCurrentUser(true);
-      // if the input is not a valid github username
+
+    if (!localStorage.getItem(searchQuery)) {
+      setIsLoading(true);
+      // if the username in search query is valid - perform a search
+      // https://www.npmjs.com/package/github-username-regex
+      if (githubUsernameRegex.test(searchQuery)) {
+        // disappear the initial message
+        setReposListMessage(null);
+        // save user repos in state
+        saveRepos();
+        // display username above the list of repos
+        setDisplayCurrentUser(true);
+        // if the input is not a valid github username
+      } else {
+        setUsernameError("Please enter valid GitHub username");
+        setIsLoading(false);
+        // username still need to be displayed if we already had other user's data shown
+        setDisplayCurrentUser(true);
+      }
+      // if user is stored in storage
     } else {
-      setUsernameError("Please enter valid GitHub username");
+      setRepos(JSON.parse(localStorage.getItem(searchQuery)));
+      setCurrentUser(searchQuery);
       setIsLoading(false);
-      // username still need to be displayed if we already had other user's data shown
       setDisplayCurrentUser(true);
+      setReposListMessage(null);
     }
   }
 
@@ -58,7 +77,10 @@ function App() {
   const saveRepos = () => {
     getUserRepos(searchQuery)
       .then(data => sortArrayOfReposObjectsByStars(data))
-      .then(sortedRepos => setRepos(sortedRepos))
+      .then(sortedRepos => {
+        setRepos(sortedRepos);
+        localStorage.setItem(searchQuery, JSON.stringify(sortedRepos));
+      })
       .then(() => {
         setCurrentUser(searchQuery);
         setIsLoading(false);
@@ -95,9 +117,15 @@ function App() {
   }
 
   // get current repos
-  const indexOfLastRepo = currentPage * reposPerPage;
-  const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
-  const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
+  // const indexOfLastRepo = currentPage * reposPerPage;
+  // const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+  // const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
+
+  const saveCurrentRepos = () => {
+    const indexOfLastRepo = currentPage * reposPerPage;
+    const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+    setCurrentRepos(repos.slice(indexOfFirstRepo, indexOfLastRepo));
+  }
 
   // handle pagination button click
   const handlePagination = (pageNumber) => {
