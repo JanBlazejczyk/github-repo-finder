@@ -7,3 +7,4 @@ export { default as SearchBar } from "./SearchBar";
 export { default as MainView } from "./MainView";
 export { default as MainMessage } from "./MainMessage";
 export { default as Heading } from "./Heading";
+export { default as Pagination } from "./Pagination";

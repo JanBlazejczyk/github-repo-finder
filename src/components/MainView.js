@@ -1,9 +1,16 @@
-import ReposList from "./ReposList";
-import MainMessage from "./MainMessage";
+import { ReposList, MainMessage, Pagination } from "./";
 
 import "../styles/MainView.scss";
 
-export default function MainView({ message, repos, user, loading, displayUser }) {
+export default function MainView({
+  message,
+  repos,
+  user,
+  loading,
+  displayUser,
+  reposPerPage,
+  totalRepos,
+  handlePagination }) {
   if (message === null) {
     return (
       <main className="main-view">
@@ -13,8 +20,12 @@ export default function MainView({ message, repos, user, loading, displayUser })
           displayUser={displayUser}
           loading={loading}
         />
+        <Pagination
+          reposPerPage={reposPerPage}
+          totalRepos={totalRepos}
+          handlePagination={handlePagination}
+        />
       </main>
-
     );
   }
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { NavBar, MainView } from "./components";
+import { NavBar, MainView, Pagination } from "./components";
 import { getUserRepos } from "./utils/api";
 
 import githubUsernameRegex from 'github-username-regex';
@@ -14,6 +14,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   // initial values in this state are for displaying the placeholders (more in readme)
   const [repos, setRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [reposPerPage] = useState(10);
 
   // takes the arrays of repositories and returns an array
   // sorted by stars and names
@@ -92,6 +94,16 @@ function App() {
     setIsLoading(false)
   }
 
+  // get current repos
+  const indexOfLastRepo = currentPage * reposPerPage;
+  const indexOfFirstRepo = indexOfLastRepo - reposPerPage;
+  const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo);
+
+  // handle pagination button click
+  const handlePagination = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
   return (
     <div className="App">
       <NavBar
@@ -101,11 +113,16 @@ function App() {
         usernameError={usernameError}
       />
       <MainView
-        repos={repos}
+        // repos list props
+        repos={currentRepos}
         message={reposListMessage}
         loading={isLoading}
         displayUser={displayCurrentUser}
         user={currentUser}
+        // pagination props
+        reposPerPage={reposPerPage}
+        totalRepos={repos.length}
+        handlePagination={handlePagination}
       />
     </div>
   );

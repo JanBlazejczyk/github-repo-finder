@@ -1,0 +1,10 @@
+@import "./utils";
+
+.pagination {
+   &--button {
+      display: inline;
+      margin: 10px;
+      color: $font-color-header;
+      cursor: pointer;
+   }
+}

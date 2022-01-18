@@ -13,6 +13,3 @@ export async function getUserRepos(username) {
   });
   return response;
 }
-
-
-
