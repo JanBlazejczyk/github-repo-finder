@@ -4,7 +4,7 @@ import "../styles/NavBar.scss";
 
 export default function NavBar({ handleInputChange, handleSubmit, handleLogoClick, usernameError }) {
   return (
-    <nav className="nav-bar">
+    <section className="nav-bar">
       <Heading handleLogoClick={handleLogoClick} />
 
       <SearchBar
@@ -12,6 +12,6 @@ export default function NavBar({ handleInputChange, handleSubmit, handleLogoClic
         handleSubmit={handleSubmit}
         error={usernameError}
       />
-    </nav>
+    </section>
   );
 }
