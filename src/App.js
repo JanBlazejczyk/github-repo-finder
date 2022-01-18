@@ -17,7 +17,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [reposPerPage] = useState(10);
   // repos to be displayed at the page
-  const [currentRepos, setCurrentRepos] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [currentRepos, setCurrentRepos] = useState([]);
 
   // each time the repos state is changed update also current repos
   useEffect(() => {
@@ -97,10 +97,10 @@ function App() {
     if (error.name === "HttpError") {
       if (error.status === 404) {
         setReposListMessage("User not found");
-        setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        setRepos([]);
       } else {
         setReposListMessage(`Something went wrong: ${error.status}`);
-        setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        setRepos([]);
       }
     }
     else {
