@@ -22,12 +22,10 @@ function App() {
   // each time the repos state is changed update also current repos
   useEffect(() => {
     saveCurrentRepos();
-
     if (currentUser !== null && repos.length === 0) {
       setReposListMessage("User has no repos!");
     }
-
-  }, [repos])
+  }, [repos, currentPage])
 
   // takes the arrays of repositories and returns an array
   // sorted by stars and names
@@ -113,7 +111,7 @@ function App() {
 
   const resetStateToDefault = () => {
     setSearchQuery("");
-    setRepos([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    setRepos([]);
     setReposListMessage("Search for users");
     setUsernameError(null);
     setIsLoading(false)
