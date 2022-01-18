@@ -22,9 +22,12 @@ function App() {
   // each time the repos state is changed update also current repos
   useEffect(() => {
     saveCurrentRepos();
+
+    if (currentUser !== null && repos.length === 0) {
+      setReposListMessage("User has no repos!");
+    }
+
   }, [repos])
-
-
 
   // takes the arrays of repositories and returns an array
   // sorted by stars and names

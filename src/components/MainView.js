@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { ReposList, MainMessage, Pagination } from "./";
 
 import "../styles/MainView.scss";
@@ -14,13 +12,7 @@ export default function MainView({
   totalRepos,
   handlePagination }) {
 
-  useEffect(() => {
-    console.log("repos in mainview", repos);
-    console.log("message in main view:", message);
-  }, [repos, message]);
-
-
-  if (message === null) {
+  if (message === null && message !== "User has no repos!") {
     return (
       <main className="main-view">
         <ReposList
