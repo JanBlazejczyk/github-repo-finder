@@ -98,10 +98,10 @@ function App() {
     if (error.name === "HttpError") {
       if (error.status === 404) {
         setReposListMessage("User not found");
-        setRepos([]);
+        // setRepos([]);
       } else {
         setReposListMessage(`Something went wrong: ${error.status}`);
-        setRepos([]);
+        // setRepos([]);
       }
     }
     else {
