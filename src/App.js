@@ -7,7 +7,7 @@ import githubUsernameRegex from 'github-username-regex';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
   const [displayCurrentUser, setDisplayCurrentUser] = useState(false);
   const [usernameError, setUsernameError] = useState();
   const [reposListMessage, setReposListMessage] = useState("Search for users");
@@ -25,7 +25,7 @@ function App() {
     if (currentUser !== null && repos.length === 0) {
       setReposListMessage("User has no repos!");
     }
-  }, [repos, currentPage])
+  }, [repos, currentPage, currentUser])
 
   // takes the arrays of repositories and returns an array
   // sorted by stars and names
